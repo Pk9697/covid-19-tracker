@@ -1,5 +1,6 @@
 import React from 'react'
-import { FormControl, Select, MenuItem,Typography } from '@mui/material'
+import { FormControl, Select, MenuItem, Typography } from '@mui/material'
+import '../assets/css/Header.css'
 
 function Header(props) {
 	const { country, countries, onCountryChange } = props || {}
@@ -8,9 +9,11 @@ function Header(props) {
 			<Typography variant='h4'>COVID-19 TRACKER</Typography>
 			<FormControl className='header__dropdown'>
 				<Select variant='outlined' value={country} onChange={onCountryChange}>
-					<MenuItem value='worldwide'>Worldwide</MenuItem>
-					{countries.map((country) => (
-						<MenuItem value={country.value}>{country.name}</MenuItem>
+					<MenuItem key={`menu-0`} value='worldwide'>Worldwide</MenuItem>
+					{countries.map((country,index) => (
+						<MenuItem key={`menu-${index+1}`} value={country.value}>
+							{country.name}
+						</MenuItem>
 					))}
 				</Select>
 			</FormControl>

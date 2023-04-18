@@ -2,9 +2,31 @@
 	margin: 0;
 }
 
-.header {
+body {
+	background-color: #f5f5fa;
+}
+
+.app {
 	display: flex;
-	align-items: center;
+	flex-direction: column;
+	gap: 1em;
+	padding: 1.5em;
+}
+
+@media (min-width: 990px) {
+	.app {
+		flex-direction: row;
+		justify-content: space-evenly;
+	}
+	.app__section-1 {
+		/* takes 70% of width */
+		flex: 0.7;
+	}
+}
+
+.app__stats {
+	display: flex;
 	justify-content: space-between;
-	margin-bottom: 1em;
+	flex-wrap: wrap;
+	gap: 1em;
 }
