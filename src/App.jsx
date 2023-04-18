@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react'
-import { Card } from '@mui/material'
+import { Card, CardContent } from '@mui/material'
 import './App.css'
 import { API_URLS } from './helpers/urls'
 import Header from './components/Header'
 import InfoBox from './components/InfoBox'
+import Table from './components/Table'
+import { sortData } from './helpers/utils'
 function App() {
 	const [countries, setCountries] = useState([])
 	const [country, setCountry] = useState('worldwide')
 	const [countryInfo, setCountryInfo] = useState({})
+	const [tableData, setTableData] = useState([])
 
 	useEffect(() => {
 		const getWorldwideCountriesData = async () => {
@@ -31,6 +34,8 @@ function App() {
 					value: item.countryInfo.iso2,
 				}))
 			)
+			const sortedData = sortData(data)
+			setTableData(sortedData)
 		}
 		getCountriesData()
 	}, [])
@@ -75,10 +80,10 @@ function App() {
 				{/* Map */}
 			</div>
 			<Card className='app__section-2'>
-				{/* Table */}
-				<h1>Table</h1>
+				<CardContent>
+					<Table countries={tableData} />
+				</CardContent>
 				{/* Graph */}
-				<h1>Graph</h1>
 			</Card>
 		</div>
 	)
