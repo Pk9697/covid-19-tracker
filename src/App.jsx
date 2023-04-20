@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
 import { Card, CardContent } from '@mui/material'
+import cors from 'cors'
 import './App.css'
 import { API_URLS } from './helpers/urls'
 import Header from './components/Header'
 import InfoBox from './components/InfoBox'
 import Table from './components/Table'
 import { sortData } from './helpers/utils'
+import LineGraph from './components/LineGraph'
+// cors()
 function App() {
 	const [countries, setCountries] = useState([])
 	const [country, setCountry] = useState('worldwide')
@@ -83,7 +86,9 @@ function App() {
 				<CardContent>
 					<Table countries={tableData} />
 				</CardContent>
-				{/* Graph */}
+				<CardContent>
+					<LineGraph />
+				</CardContent>
 			</Card>
 		</div>
 	)
