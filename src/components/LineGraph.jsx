@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Chart as ChartJS, registerables } from 'chart.js'
 import { Line } from 'react-chartjs-2'
-import numeral from 'numeral'
+import { Card, CardContent } from '@mui/material'
 import { API_URLS } from '../helpers/urls'
 
 ChartJS.register(...registerables)
@@ -53,20 +53,20 @@ const options = {
 	// },
 }
 
-function LineGraph() {
+function LineGraph({casesType}) {
 	const [data, setData] = useState({})
 	useEffect(() => {
 		const getWorldwideHistoricalDataOfLastNDays = async () => {
 			const url = API_URLS.getWorldwideHistoricalDataOfLastNDays(30)
 			const res = await fetch(url)
 			const data = await res.json()
-			setData(buildChartData(data))
+			setData(buildChartData(data,casesType))
 		}
 		getWorldwideHistoricalDataOfLastNDays()
-	}, [])
-	// console.log(data)
+	}, [casesType])
 
-	const buildChartData = (data, casesType = 'cases') => {
+
+	const buildChartData = (data, casesType) => {
 		const chartData = []
 		let lastDataPoint
 		for (let date in data[casesType]) {
@@ -83,27 +83,29 @@ function LineGraph() {
 	}
 
 	return (
-		<div className='line-graph'>
-			<h2>Worldwide new cases</h2>
-			{data?.length > 0 && (
-				<Line
-					options={options}
-					data={{
-						datasets: [
-							{
-								backgroundColor: 'red',
-								borderColor: '#CC1034',
-								data: data,
-								tension: 0.4,
-								fill: true,
-								pointStyle: 'rect',
-								pointBorderColor: 'blue',
-							},
-						],
-					}}
-				/>
-			)}
-		</div>
+		<Card className='line-graph'>
+			<CardContent className='line-content'>
+				<h2>Worldwide new { casesType}</h2>
+				{data?.length > 0 && (
+					<Line
+						options={options}
+						data={{
+							datasets: [
+								{
+									backgroundColor: 'red',
+									borderColor: '#CC1034',
+									data: data,
+									tension: 0.4,
+									fill: true,
+									pointStyle: 'rect',
+									pointBorderColor: 'blue',
+								},
+							],
+						}}
+					/>
+				)}
+			</CardContent>
+		</Card>
 	)
 }
 

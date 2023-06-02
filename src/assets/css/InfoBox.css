@@ -1,0 +1,32 @@
+.info-box{
+    /* takes as much room as it can */
+    /* flex:1; */
+    cursor: pointer;
+
+}
+
+.info-box--selected{
+    border-top: 0.5em solid greenyellow;
+}
+
+.info-box--red{
+    border-color: #cc1034;
+}
+
+.info-box__cases{
+    color: #cc1034;
+    font-weight: 600;
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.info-box__cases--green{
+    color: #7dd71d;
+}
+
+.info-box__total{
+    color: #6c757d;
+    font-weight: 700;
+    font-size: 0.8rem;
+    margin-top: 1em;
+} 

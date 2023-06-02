@@ -1,21 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { Card, CardContent } from '@mui/material'
 import '../assets/css/Table.css'
+import numeral from 'numeral'
+import { sortData } from '../helpers/utils'
 function Table(props) {
-	const { countries } = props || {}
+	const { tableData, casesType } = props
+	const [countries, setCountries] = useState([])
+	useEffect(() => {
+		setCountries(sortData(tableData, casesType))
+	},[casesType,tableData])
 	return (
-		<div className='table'>
-			<h2>Live Cases By Country</h2>
-			<div className='table__countries'>
-				{countries.map(({ country, cases }, index) => (
-					<div key={`table-${index}`} className='table__row'>
-						<div className='table__data'>{country}</div>
-						<div className='table__data'>
-							<strong>{cases}</strong>
+		<Card className='table'>
+			<CardContent>
+				<h2>Live {casesType} By Country</h2>
+				<div className='table__countries'>
+					{countries.map((country, index) => (
+						<div key={`table-${index}`} className='table__row'>
+							<div className='table__data'>{country.country}</div>
+							<div className='table__data'>
+								<strong>{numeral(country[casesType]).format('0,0')}</strong>
+							</div>
 						</div>
-					</div>
-				))}
-			</div>
-		</div>
+					))}
+				</div>
+			</CardContent>
+		</Card>
 	)
 }
 

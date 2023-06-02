@@ -6,7 +6,7 @@ function Header(props) {
 	const { country, countries, onCountryChange } = props || {}
 	return (
 		<div className='header'>
-			<Typography variant='h4'>COVID-19 TRACKER</Typography>
+			<h2 className='header__name'>COVID-19 TRACKER</h2>
 			<FormControl className='header__dropdown'>
 				<Select variant='outlined' value={country} onChange={onCountryChange}>
 					<MenuItem key={`menu-0`} value='worldwide'>Worldwide</MenuItem>
